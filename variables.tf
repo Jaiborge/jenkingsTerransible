@@ -7,7 +7,7 @@ variable "vpc_id" {
   description = "VPC for Jenkins"
 }
 
-variable "cidr_block" {
+variable "cidr" {
   description = "CIDR Block to allow Jenkins Access"
 }
 
