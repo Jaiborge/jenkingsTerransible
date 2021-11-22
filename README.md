@@ -63,6 +63,78 @@ gpodkAZdkBm+tju2NRIxIhuDU02ddJFEGy/8lp+XqEm+YfbUpHrCSNOjYBDkdAp6umQFVq
 jQi2RBtpIsNFikcAAAAacmFodWxAcmFodWwtSFAtWkJvb2stMTUtRzIB
 -----END OPENSSH PRIVATE KEY-----
 
-4)
+4) Execute with Terraform APPLY PLAN
+
+terraform plan -var-file="dev-east.tfvars"
+
+
+5) Create your intances
+
+terraform apply -var-file="dev-east.tfvars"
+
+5) vouala
+
+ Enter a value: yes
+
+aws_key_pair.deployer: Creating...
+aws_security_group.jenkins_seg: Creating...
+aws_key_pair.deployer: Creation complete after 1s [id=aws_key]
+aws_security_group.jenkins_seg: Creation complete after 4s [id=sg-0c8ec69fb04301ebb]
+aws_instance.web: Creating...
+aws_instance.web: Still creating... [10s elapsed]
+aws_instance.web: Still creating... [20s elapsed]
+aws_instance.web: Still creating... [30s elapsed]
+aws_instance.web: Creation complete after 35s [id=i-067f82b83d0d235de]
+
+Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+
+6) Connect to ec2 Instance
+
+ssh -i "macAwsPuKey"   ec2-user@ec2-52-90-42-27.compute-1.amazonaws.com
+
+
+8) Execute Ansible 
+   ansible-playbook -i hosts ansibleJenkinsInstallAws.yml
+
+TASK [Install yum] ******************************************************************************************************************************************
+ok: [18.212.41.185]
+
+TASK [Install Git] ******************************************************************************************************************************************
+ok: [18.212.41.185]
+
+TASK [Download jenkins.repo] ********************************************************************************************************************************
+changed: [18.212.41.185]
+
+TASK [Install Jenkins] **************************************************************************************************************************************
+changed: [18.212.41.185]
+
+TASK [Start & Enable Jenkins] *******************************************************************************************************************************
+changed: [18.212.41.185]
+
+TASK [Sleep for 30 seconds and continue with play] **********************************************************************************************************
+ok: [18.212.41.185]
+
+TASK [ensure jenkins is running] ****************************************************************************************************************************
+ok: [18.212.41.185]
+
+TASK [Get init password Jenkins] ****************************************************************************************************************************
+ok: [18.212.41.185]
+
+TASK [Print init password Jenkins] **************************************************************************************************************************
+ok: [18.212.41.185] => {
+    "result.stdout": "00a8a8b3e0884ecab2aaa2a9a33b5602"
+}
+
+PLAY RECAP **************************************************************************************************************************************************
+18.212.41.185              : ok=11   changed=3    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+
+
+
+
+
+
 
 
